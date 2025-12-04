@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrip - Calculadora de Impacto Ambiental</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <span class="header-icon">🌍</span>
+                <h1 class="header-title">EcoTrip Calculator</h1>
+                <p class="header-subtitle">Calcula tu impacto ambiental en cada viaje</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Trip Details Section -->
+            <section class="trip-details">
+                <h2 class="section-title">Detalles del Viaje</h2>
+
+                <div class="form-group">
+                    <label for="origin">Origen</label>
+                    <input type="text" id="origin" class="form-input" placeholder="Ingresa el origen del viaje">
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">Destino</label>
+                    <input type="text" id="destination" class="form-input" placeholder="Ingresa el destino del viaje">
+                </div>
+
+                <div class="form-group">
+                    <label for="distanceMode">Modo de Distancia</label>
+                    <select id="distanceMode" class="form-select">
+                        <option value="auto">Calcular automáticamente</option>
+                        <option value="manual">Ingresar manualmente</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="distanceGroup">
+                    <label for="distance">Distancia (km)</label>
+                    <input type="number" id="distance" class="form-input" placeholder="Distancia en kilómetros" min="0"
+                        step="0.1">
+                </div>
+            </section>
+
+            <!-- Transport Selection Section -->
+            <section class="transport-selection">
+                <h2 class="section-title">Selecciona tu Medio de Transporte</h2>
+
+                <div class="transport-grid">
+                    <!-- Bicicleta -->
+                    <div class="transport-card" data-transport="bicycle">
+                        <div class="transport-icon">🚴</div>
+                        <h3 class="transport-name">Bicicleta</h3>
+                        <p class="transport-description">0 g CO₂/km</p>
+                        <div class="transport-eco-badge">🌱 Eco-Friendly</div>
+                    </div>
+
+                    <!-- Auto -->
+                    <div class="transport-card" data-transport="car">
+                        <div class="transport-icon">🚗</div>
+                        <h3 class="transport-name">Auto</h3>
+                        <p class="transport-description">120 g CO₂/km</p>
+                        <div class="transport-eco-badge impact-medium">⚠️ Impacto Medio</div>
+                    </div>
+
+                    <!-- Camión -->
+                    <div class="transport-card" data-transport="truck">
+                        <div class="transport-icon">🚚</div>
+                        <h3 class="transport-name">Camión</h3>
+                        <p class="transport-description">250 g CO₂/km</p>
+                        <div class="transport-eco-badge impact-high">🔴 Alto Impacto</div>
+                    </div>
+
+                    <!-- Ómnibus -->
+                    <div class="transport-card" data-transport="bus">
+                        <div class="transport-icon">🚌</div>
+                        <h3 class="transport-name">Ómnibus</h3>
+                        <p class="transport-description">80 g CO₂/km</p>
+                        <div class="transport-eco-badge impact-low">🟡 Impacto Bajo</div>
+                    </div>
+                </div>
+
+                <button id="calculateBtn" class="calculate-btn" disabled>
+                    Calcular Impacto Ambiental
+                </button>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal para Resultados -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 class="modal-title">Resultados del Análisis</h2>
+
+            <div class="results-grid">
+                <!-- Card de Emisiones CO2 -->
+                <div class="result-card co2-card">
+                    <div class="result-icon">☁️</div>
+                    <h3 class="result-title">Emisiones de CO₂</h3>
+                    <div class="result-value" id="co2Value">0 kg</div>
+                    <p class="result-description">Dióxido de carbono emitido en tu viaje</p>
+                    <div class="result-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Distancia:</span>
+                            <span class="detail-value" id="modalDistance">0 km</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Transporte:</span>
+                            <span class="detail-value" id="modalTransport">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card de Créditos de Carbono -->
+                <div class="result-card credits-card">
+                    <div class="result-icon">🌿</div>
+                    <h3 class="result-title">Créditos de Carbono</h3>
+                    <div class="result-value" id="creditsValue">0</div>
+                    <p class="result-description">Créditos necesarios para compensar tu huella</p>
+                    <div class="result-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Árboles equivalentes:</span>
+                            <span class="detail-value" id="treesEquivalent">0</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Costo estimado:</span>
+                            <span class="detail-value" id="creditsCost">$0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-secondary" id="newCalculationBtn">Nueva Consulta</button>
+                <button class="btn-primary" id="shareBtn">Compartir Resultados</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 EcoTrip Calculator | Cuidando nuestro planeta 🌍</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/routes-data.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

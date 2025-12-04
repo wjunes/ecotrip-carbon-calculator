@@ -1,0 +1,238 @@
+# ========================================
+# EcoTrip Calculator - .gitignore
+# ========================================
+
+# ========================================
+# Archivos de configuración sensibles
+# ========================================
+# API Keys y configuración privada
+config.local.js
+.env
+.env.local
+.env.*.local
+api-keys.js
+secrets.js
+
+# ========================================
+# Archivos de prueba y desarrollo
+# ========================================
+test.html
+test-*.html
+debug.html
+demo.html
+playground.html
+
+# ========================================
+# Node.js (si decides usar npm/node en el futuro)
+# ========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ========================================
+# Logs y bases de datos locales
+# ========================================
+*.log
+logs/
+*.sql
+*.sqlite
+*.db
+
+# ========================================
+# Archivos del sistema operativo
+# ========================================
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ========================================
+# IDEs y Editores
+# ========================================
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# JetBrains IDEs (WebStorm, PhpStorm, etc.)
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Sessionx.vim
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ========================================
+# Build y distribución
+# ========================================
+dist/
+build/
+*.min.js
+*.min.css
+*.map
+
+# ========================================
+# Archivos temporales
+# ========================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.backup
+*~.nib
+*.old
+
+# ========================================
+# Coverage y testing
+# ========================================
+coverage/
+.nyc_output/
+*.lcov
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# ========================================
+# Documentación generada
+# ========================================
+docs/_build/
+site/
+
+# ========================================
+# Caché de herramientas
+# ========================================
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.npm/
+.yarn/
+.pnp.*
+
+# ========================================
+# Archivos de versiones anteriores
+# ========================================
+*.v1.js
+*.v1.css
+*.v1.html
+*.old.*
+backup/
+old/
+
+# ========================================
+# Archivos de producción local
+# ========================================
+*.production.js
+*.production.css
+
+# ========================================
+# Archivos multimedia grandes (opcional)
+# ========================================
+# Descomenta si tienes archivos grandes que no quieres en git
+# *.mp4
+# *.mov
+# *.avi
+# *.psd
+# *.ai
+
+# ========================================
+# Certificados y llaves
+# ========================================
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+
+# ========================================
+# Variables de entorno y configuración local
+# ========================================
+.envrc
+.local/
+
+# ========================================
+# Archivos específicos del proyecto
+# ========================================
+# Archivos de prueba temporal
+test/
+tests/
+__tests__/
+
+# Carpeta de capturas de pantalla
+screenshots/
+
+# Notas de desarrollo personal
+TODO.md
+NOTES.md
+notes.txt
+todo.txt
