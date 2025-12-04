@@ -3,7 +3,7 @@
 **Proyecto:** Calculadora de Impacto Ambiental para Viajes  
 **Versión:** 1.0.0  
 **Fecha:** Diciembre 2025  
-**Autor:** Willans Junes
+**Autor:** Carbon Calculator Team
 
 ---
 
@@ -22,6 +22,7 @@ Desarrollar una aplicación web interactiva que permita a los usuarios calcular 
 Se definieron los componentes principales de la aplicación:
 
 - **Frontend (HTML/CSS):**
+
   - Header con identidad visual del proyecto
   - Formulario de entrada de datos (origen, destino, distancia)
   - Selector de modo de distancia (automático/manual)
@@ -38,6 +39,7 @@ Se definieron los componentes principales de la aplicación:
 
 #### 1.2 Estructura de Archivos Definida
 
+```
 carbon-calculator/
 ├── index.html              # Página principal
 ├── README.md               # Documentación del usuario
@@ -50,6 +52,7 @@ carbon-calculator/
     ├── calculator.js      # Motor de cálculos
     ├── ui.js              # Controlador UI
     └── app.js             # Aplicación principal
+```
 
 ---
 
@@ -60,6 +63,7 @@ carbon-calculator/
 Se implementó una estructura semántica HTML5 con:
 
 **Header:**
+
 - Icono animado de la Tierra (🌍)
 - Título "EcoTrip Calculator"
 - Subtítulo descriptivo
@@ -67,12 +71,14 @@ Se implementó una estructura semántica HTML5 con:
 - Animación flotante de fondo
 
 **Sección de Detalles del Viaje:**
+
 - Input para origen del viaje
 - Input para destino del viaje
 - Select para modo de distancia (automático/manual)
 - Input numérico para distancia en kilómetros
 
 **Sección de Selección de Transporte:**
+
 - 4 Cards interactivas:
   - 🚴 **Bicicleta** - 0 g CO₂/km (Eco-Friendly)
   - 🚗 **Auto** - 120 g CO₂/km (Impacto Medio)
@@ -81,17 +87,21 @@ Se implementó una estructura semántica HTML5 con:
 - Botón de cálculo (deshabilitado hasta validar datos)
 
 **Modal de Resultados:**
+
 - Card de emisiones de CO₂ con detalles
 - Card de créditos de carbono con equivalencias
 - Botones de acción (Nueva Consulta, Compartir)
 
 **Footer:**
+
 - Copyright y mensaje ambiental
 
 #### 2.2 Desarrollo de CSS (styles.css)
+
 Se creó un sistema de diseño completo con:
 
 **Variables CSS:**
+
 ```css
 - Colores: primarios, impacto ambiental, neutrales
 - Sombras: 4 niveles (sm, md, lg, xl)
@@ -101,6 +111,7 @@ Se creó un sistema de diseño completo con:
 ```
 
 **Características del Diseño:**
+
 - Sistema de colores eco-friendly (verdes)
 - Gradientes modernos en header y fondo
 - Animaciones suaves (float, bounce, pulse, fade, slide)
@@ -113,6 +124,7 @@ Se creó un sistema de diseño completo con:
 - Soporte para Safari con prefijos webkit
 
 **Breakpoints Responsive:**
+
 - Móviles: < 480px
 - Tablets: < 768px
 - Escritorio: > 768px
@@ -167,6 +179,7 @@ KNOWN_ROUTES = {
 - `estimateTravelTime()` - Tiempo estimado de viaje
 
 **Rutas predefinidas incluidas:**
+
 - Argentina: 6 rutas (Buenos Aires, Córdoba, Rosario, etc.)
 - México: 3 rutas principales
 - España: 3 rutas principales
@@ -177,28 +190,34 @@ KNOWN_ROUTES = {
 **Clase CarbonCalculator con métodos:**
 
 - `calculateEmissions()` - Calcula emisiones totales de CO₂
+
   - Validación de distancia y tipo de transporte
   - Conversión: gramos → kilogramos → toneladas
   - Retorna objeto con múltiples formatos
 
 - `calculateCarbonCredits()` - Créditos necesarios
+
   - Cálculo basado en toneladas de CO₂
   - Costo en múltiples monedas (USD, EUR, ARS, MXN)
 
 - `calculateTreeEquivalent()` - Equivalencia en árboles
+
   - Número de árboles necesarios por año
   - Años para 1 árbol en absorber emisiones
 
 - `calculateComparisons()` - Comparaciones entre transportes
+
   - Diferencias de emisiones
   - Porcentajes de ahorro/incremento
 
 - `generateFullReport()` - Reporte completo integrado
+
   - Emisiones, créditos, árboles
   - Comparaciones y nivel de impacto
   - Timestamp y datos formateados
 
 - `getImpactLevel()` - Determina nivel de impacto
+
   - Clasificación: zero, very-low, low, medium, high
   - Color, icono y mensaje asociados
 
@@ -206,6 +225,7 @@ KNOWN_ROUTES = {
 - `formatCurrency()` - Formato monetario multi-moneda
 
 **Algoritmos de Cálculo:**
+
 ```
 Emisiones (kg) = Distancia (km) × Factor (g/km) ÷ 1000
 Créditos = Emisiones (toneladas) ÷ 1 tonelada/crédito
@@ -218,10 +238,12 @@ Costo = Créditos × Precio/crédito
 **Clase UIManager con métodos:**
 
 **Inicialización:**
+
 - `initializeElements()` - Referencias DOM
 - `setupEventListeners()` - Configuración de eventos
 
 **Gestión de Formulario:**
+
 - `handleDistanceModeChange()` - Cambio automático/manual
 - `tryAutoCalculateDistance()` - Intento de cálculo automático
 - `selectTransport()` - Selección de tarjeta de transporte
@@ -229,22 +251,26 @@ Costo = Créditos × Precio/crédito
 - `getFormData()` - Obtención de datos
 
 **Presentación de Resultados:**
+
 - `showResults()` - Muestra modal con resultados
 - `openModal()` - Abre modal con animación
 - `closeModal()` - Cierra modal
 - `shareResults()` - Comparte en redes (Web Share API)
 
 **Feedback Visual:**
+
 - `showNotification()` - Notificaciones tipo toast
 - `showLoading()` - Indicador de carga
 - `showError()` - Mensajes de error
 - `showSuccess()` - Mensajes de éxito
 
 **Utilidades:**
+
 - `resetForm()` - Limpia formulario
 - `copyToClipboard()` - Copia texto al portapapeles
 
 **Eventos manejados:**
+
 - Cambio de modo de distancia
 - Click en tarjetas de transporte
 - Validación en tiempo real de inputs
@@ -257,11 +283,13 @@ Costo = Créditos × Precio/crédito
 **Clase EcoTripApp como coordinador:**
 
 **Inicialización:**
+
 - `init()` - Inicialización completa de la app
 - `checkDependencies()` - Verifica módulos disponibles
 - `setupEventListeners()` - Configura eventos principales
 
 **Flujo Principal:**
+
 - `handleCalculate()` - Orquesta el proceso de cálculo
   1. Obtiene datos del formulario
   2. Valida datos completos
@@ -271,6 +299,7 @@ Costo = Créditos × Precio/crédito
   6. Guarda en historial
 
 **Validación:**
+
 - `validateFormData()` - Validación exhaustiva
   - Origen requerido
   - Destino requerido
@@ -278,6 +307,7 @@ Costo = Créditos × Precio/crédito
   - Transporte seleccionado
 
 **Persistencia:**
+
 - `saveToHistory()` - Guarda en localStorage
 - `getHistory()` - Recupera historial
 - `clearHistory()` - Limpia historial
@@ -285,6 +315,7 @@ Costo = Créditos × Precio/crédito
 - `exportHistory()` - Exporta datos JSON
 
 **Utilidades:**
+
 - `showWelcomeMessage()` - Mensaje de bienvenida en consola
 - `handleInitError()` - Manejo de errores de inicialización
 - `delay()` - Promise para delays
@@ -294,38 +325,46 @@ Costo = Créditos × Precio/crédito
 ### **FASE 4: Resolución de Problemas Técnicos**
 
 #### 4.1 Problema: Error de Carga de Archivos
+
 **Síntoma:** Archivo no encontrado `routes.data.js`  
 **Causa:** Inconsistencia en el nombre del archivo (rotes vs routes)  
-**Solución:** 
+**Solución:**
+
 - Renombrar `rotes.data.js` → `routes-data.js`
 - Actualizar referencia en `index.html`
 
 #### 4.2 Problema: Inicialización Prematura
+
 **Síntoma:** Variables `undefined` al crear instancias  
 **Causa:** Instancias se creaban al cargar el archivo, antes que las constantes  
 **Solución:**
+
 - Eliminar creación automática en cada módulo
 - Crear instancias en `app.js` después de verificar dependencias
 - Patrón de inicialización tardía (lazy initialization)
 
 #### 4.3 Problema: Validación con Valor 0 (Bug Crítico)
+
 **Síntoma:** Error "Tipo de transporte inválido: bicycle"  
-**Causa:** Validación `if (!this.emissionFactors[transportType])`  
+**Causa:** Validación `if (!this.emissionFactors[transportType])`
+
 - El valor `0` (bicycle) es "falsy" en JavaScript
 - La validación fallaba incorrectamente
 
 **Solución:**
+
 ```javascript
 // ❌ ANTES (incorrecto)
 if (!this.emissionFactors[transportType]) {
-    throw new Error(`Tipo de transporte inválido`);
+  throw new Error(`Tipo de transporte inválido`);
 }
 
 // ✅ DESPUÉS (correcto)
 if (!(transportType in this.emissionFactors)) {
-    throw new Error(`Tipo de transporte inválido`);
+  throw new Error(`Tipo de transporte inválido`);
 }
 ```
+
 - Usar operador `in` para verificar existencia de propiedad
 - No depender del valor (que puede ser 0, null, etc.)
 
@@ -334,12 +373,15 @@ if (!(transportType in this.emissionFactors)) {
 ### **FASE 5: Optimización y Documentación**
 
 #### 5.1 Limpieza de Código
+
 - Eliminación de console.logs de debug
 - Comentarios descriptivos en funciones complejas
 - Formato consistente del código
 
 #### 5.2 Documentación Creada
+
 - **README.md** - Guía completa del usuario (200+ líneas)
+
   - Características
   - Instalación y uso
   - Guía paso a paso
@@ -350,6 +392,7 @@ if (!(transportType in this.emissionFactors)) {
   - Personalización
 
 - **.gitignore** - Exclusiones de Git completas
+
   - Archivos sensibles (API keys)
   - Archivos de sistema (Windows, macOS, Linux)
   - IDEs (VS Code, JetBrains, etc.)
@@ -359,19 +402,21 @@ if (!(transportType in this.emissionFactors)) {
 - **DESARROLLO.md** - Este documento
 
 #### 5.3 Testing Manual
+
 ✅ Formulario de entrada - Validaciones funcionando  
 ✅ Selección de transporte - Las 4 opciones operativas  
 ✅ Cálculo de emisiones - Precisión verificada  
 ✅ Modal de resultados - Presentación correcta  
 ✅ Responsive design - Probado en múltiples dispositivos  
 ✅ Historial local - Persistencia funcionando  
-✅ Compartir resultados - Web Share API operativa  
+✅ Compartir resultados - Web Share API operativa
 
 ---
 
 ## 📊 Características Técnicas Implementadas
 
 ### Arquitectura del Software
+
 - **Patrón:** Programación Orientada a Objetos (POO)
 - **Módulos:** 5 archivos JavaScript independientes
 - **Comunicación:** Inyección de dependencias
@@ -379,6 +424,7 @@ if (!(transportType in this.emissionFactors)) {
 - **Estándares:** ES6+ (clases, arrow functions, template literals)
 
 ### Tecnologías Utilizadas
+
 - **HTML5** - Estructura semántica
 - **CSS3** - Variables CSS, Grid, Flexbox, Animations
 - **JavaScript ES6+** - Clases, Modules, Promises
@@ -386,12 +432,14 @@ if (!(transportType in this.emissionFactors)) {
 - **Responsive Design** - Mobile-first approach
 
 ### Características de Performance
+
 - Carga rápida (sin dependencias externas)
 - Animaciones optimizadas (GPU-accelerated)
 - Validación en tiempo real
 - Caché de datos en localStorage
 
 ### Accesibilidad y UX
+
 - Diseño intuitivo y visual
 - Feedback inmediato al usuario
 - Mensajes de error descriptivos
@@ -403,6 +451,7 @@ if (!(transportType in this.emissionFactors)) {
 ## 📈 Resultados del Proyecto v1.0
 
 ### Funcionalidades Entregadas
+
 ✅ Cálculo preciso de emisiones de CO₂  
 ✅ 4 medios de transporte configurados  
 ✅ Modal interactivo de resultados  
@@ -415,9 +464,10 @@ if (!(transportType in this.emissionFactors)) {
 ✅ 15+ rutas predefinidas  
 ✅ Diseño responsive completo  
 ✅ Validaciones exhaustivas  
-✅ Sistema de notificaciones  
+✅ Sistema de notificaciones
 
 ### Métricas del Código
+
 - **Archivos HTML:** 1 (166 líneas)
 - **Archivos CSS:** 1 (730 líneas)
 - **Archivos JavaScript:** 5 (1,800+ líneas)
@@ -436,12 +486,15 @@ La versión 2.0 del proyecto incorporará la **Google Maps Distance Matrix API**
 ### 6.1 Planificación de la Integración
 
 #### **API a Utilizar:**
+
 - **Google Maps Distance Matrix API**
+
   - Calcula distancias y tiempos de viaje reales
   - Soporta múltiples modos de transporte
   - Considera tráfico y rutas óptimas
 
 - **Google Maps Geocoding API** (opcional)
+
   - Convierte direcciones en coordenadas
   - Valida ubicaciones ingresadas
 
@@ -452,6 +505,7 @@ La versión 2.0 del proyecto incorporará la **Google Maps Distance Matrix API**
 #### **Pasos de Implementación Planificados:**
 
 **1. Obtención de Credenciales**
+
 ```bash
 1. Crear proyecto en Google Cloud Console
 2. Habilitar APIs necesarias:
@@ -466,12 +520,13 @@ La versión 2.0 del proyecto incorporará la **Google Maps Distance Matrix API**
 ```
 
 **2. Configuración de Seguridad**
+
 ```javascript
 // Archivo: config.local.js (no se subirá a Git)
 const GOOGLE_MAPS_CONFIG = {
-    apiKey: 'TU_API_KEY_AQUI',
-    region: 'AR', // Argentina (opcional)
-    language: 'es' // Español
+  apiKey: "TU_API_KEY_AQUI",
+  region: "AR", // Argentina (opcional)
+  language: "es", // Español
 };
 ```
 
@@ -489,8 +544,8 @@ async calculateDistance(origin, destination) {
 
     // 2. Verificar si hay API key configurada
     if (!GOOGLE_MAPS_CONFIG.apiKey) {
-        return { 
-            distance: null, 
+        return {
+            distance: null,
             method: 'manual',
             error: 'Modo manual - ingresa la distancia'
         };
@@ -499,23 +554,23 @@ async calculateDistance(origin, destination) {
     // 3. Llamar a Google Maps API
     try {
         const distance = await this.fetchDistanceFromGoogle(
-            origin, 
+            origin,
             destination
         );
-        
+
         // 4. Guardar en caché local para futuras consultas
         this.addRoute(origin, destination, distance);
-        
-        return { 
-            distance: distance, 
+
+        return {
+            distance: distance,
             method: 'google_maps',
             message: 'Distancia calculada con Google Maps'
         };
-        
+
     } catch (error) {
         console.error('Error consultando Google Maps:', error);
-        return { 
-            distance: null, 
+        return {
+            distance: null,
             method: 'error',
             error: 'Error al calcular. Ingresa manualmente.'
         };
@@ -539,14 +594,14 @@ async fetchDistanceFromGoogle(origin, destination) {
 
     if (data.status === 'OK') {
         const element = data.rows[0].elements[0];
-        
+
         if (element.status === 'OK') {
             // Convertir metros a kilómetros
             const distanceKm = element.distance.value / 1000;
             return Math.round(distanceKm * 10) / 10; // 1 decimal
         }
     }
-    
+
     throw new Error('No se pudo calcular la distancia');
 }
 ```
@@ -577,7 +632,7 @@ initPlacesAutocomplete() {
         this.originInput,
         { types: ['(cities)'] }
     );
-    
+
     const destinationAutocomplete = new google.maps.places.Autocomplete(
         this.destinationInput,
         { types: ['(cities)'] }
@@ -591,55 +646,50 @@ Implementar sistema de caché para evitar consultas repetidas:
 
 ```javascript
 class RouteCache {
-    constructor() {
-        this.cache = this.loadFromLocalStorage();
-        this.maxAge = 7 * 24 * 60 * 60 * 1000; // 7 días
+  constructor() {
+    this.cache = this.loadFromLocalStorage();
+    this.maxAge = 7 * 24 * 60 * 60 * 1000; // 7 días
+  }
+
+  get(origin, destination) {
+    const key = this.generateKey(origin, destination);
+    const cached = this.cache[key];
+
+    if (cached && !this.isExpired(cached.timestamp)) {
+      return cached.distance;
     }
 
-    get(origin, destination) {
-        const key = this.generateKey(origin, destination);
-        const cached = this.cache[key];
-        
-        if (cached && !this.isExpired(cached.timestamp)) {
-            return cached.distance;
-        }
-        
-        return null;
-    }
+    return null;
+  }
 
-    set(origin, destination, distance) {
-        const key = this.generateKey(origin, destination);
-        this.cache[key] = {
-            distance: distance,
-            timestamp: Date.now()
-        };
-        this.saveToLocalStorage();
-    }
+  set(origin, destination, distance) {
+    const key = this.generateKey(origin, destination);
+    this.cache[key] = {
+      distance: distance,
+      timestamp: Date.now(),
+    };
+    this.saveToLocalStorage();
+  }
 
-    isExpired(timestamp) {
-        return (Date.now() - timestamp) > this.maxAge;
-    }
+  isExpired(timestamp) {
+    return Date.now() - timestamp > this.maxAge;
+  }
 
-    generateKey(origin, destination) {
-        return `${origin.toUpperCase()}-${destination.toUpperCase()}`;
-    }
+  generateKey(origin, destination) {
+    return `${origin.toUpperCase()}-${destination.toUpperCase()}`;
+  }
 
-    loadFromLocalStorage() {
-        try {
-            return JSON.parse(
-                localStorage.getItem('route_cache') || '{}'
-            );
-        } catch {
-            return {};
-        }
+  loadFromLocalStorage() {
+    try {
+      return JSON.parse(localStorage.getItem("route_cache") || "{}");
+    } catch {
+      return {};
     }
+  }
 
-    saveToLocalStorage() {
-        localStorage.setItem(
-            'route_cache', 
-            JSON.stringify(this.cache)
-        );
-    }
+  saveToLocalStorage() {
+    localStorage.setItem("route_cache", JSON.stringify(this.cache));
+  }
 }
 ```
 
@@ -658,7 +708,7 @@ async calculateWithFallback(origin, destination) {
     // Nivel 3: Google Maps API
     try {
         result = await this.fetchDistanceFromGoogle(
-            origin, 
+            origin,
             destination
         );
         this.cache.set(origin, destination, result);
@@ -668,8 +718,8 @@ async calculateWithFallback(origin, destination) {
     }
 
     // Nivel 4: Modo manual (fallback)
-    return { 
-        distance: null, 
+    return {
+        distance: null,
         source: 'manual',
         error: 'Ingresa la distancia manualmente'
     };
@@ -688,7 +738,7 @@ showDistanceSource(source) {
         'google_maps': '🗺️ Calculado con Google Maps',
         'manual': '✏️ Ingreso manual'
     };
-    
+
     this.showNotification(
         indicators[source] || 'Distancia actualizada',
         'info'
@@ -720,12 +770,14 @@ carbon-calculator/
 ### 6.2 Consideraciones Técnicas
 
 #### **Costos de la API:**
+
 - Google ofrece **$200 USD en créditos gratis** por mes
 - Distance Matrix API: ~$5 USD por 1000 consultas
 - Con caché efectivo: costo mínimo o gratuito
 - Monitorear uso en Google Cloud Console
 
 #### **Optimizaciones:**
+
 1. **Caché local persistente** - Reduce consultas API
 2. **Rutas predefinidas** - Bypass para rutas comunes
 3. **Agrupación de consultas** - Batch requests si es necesario
@@ -733,6 +785,7 @@ carbon-calculator/
 5. **Compresión** - Usar formato de respuesta optimizado
 
 #### **Seguridad:**
+
 - ✅ API Key en archivo local (no en Git)
 - ✅ Restricciones por dominio (HTTP referrer)
 - ✅ Restricciones por API específica
@@ -740,6 +793,7 @@ carbon-calculator/
 - ✅ Rate limiting del lado del cliente
 
 #### **Experiencia de Usuario:**
+
 - Loading spinner durante consulta API
 - Mensaje descriptivo del método usado
 - Fallback automático a manual si falla
@@ -749,21 +803,25 @@ carbon-calculator/
 ### 6.3 Timeline Estimado para v2.0
 
 **Semana 1: Configuración**
+
 - Día 1-2: Crear proyecto en Google Cloud, obtener API keys
 - Día 3-4: Implementar sistema de configuración seguro
 - Día 5: Testing de conexión básica a la API
 
 **Semana 2: Desarrollo Core**
+
 - Día 1-2: Implementar método `fetchDistanceFromGoogle()`
 - Día 3-4: Sistema de caché inteligente
 - Día 5: Sistema de fallbacks
 
 **Semana 3: Features Avanzadas**
+
 - Día 1-2: Autocompletado con Places API
 - Día 3-4: Optimizaciones y throttling
 - Día 5: Testing exhaustivo
 
 **Semana 4: Refinamiento**
+
 - Día 1-2: Manejo de errores mejorado
 - Día 3-4: Actualización de documentación
 - Día 5: Deploy y monitoreo
@@ -771,6 +829,7 @@ carbon-calculator/
 ### 6.4 Beneficios Esperados de la Integración
 
 ✨ **Para el Usuario:**
+
 - Cálculo automático de distancias reales
 - No necesita conocer la distancia exacta
 - Autocompletado de direcciones
@@ -778,6 +837,7 @@ carbon-calculator/
 - Experiencia más fluida
 
 ✨ **Para el Proyecto:**
+
 - Escalabilidad global (cualquier ubicación del mundo)
 - Base de datos de rutas auto-generada
 - Mayor adopción y uso
@@ -789,6 +849,7 @@ carbon-calculator/
 ## 🎓 Lecciones Aprendidas
 
 ### Técnicas:
+
 1. **Inicialización tardía** - Evita problemas de dependencias
 2. **Validación con `in`** - Para propiedades con valor 0
 3. **Modularización** - Facilita mantenimiento y escalabilidad
@@ -796,6 +857,7 @@ carbon-calculator/
 5. **Caché local** - Mejora performance y reduce costos
 
 ### Buenas Prácticas:
+
 1. Separación clara de responsabilidades
 2. Comentarios descriptivos en código complejo
 3. Nombres de variables semánticos
@@ -803,6 +865,7 @@ carbon-calculator/
 5. Documentación completa del proyecto
 
 ### Debugging:
+
 1. Console.logs estratégicos para rastreo
 2. Validación de tipos de datos
 3. Testing incremental por módulo
@@ -813,6 +876,7 @@ carbon-calculator/
 ## 📚 Referencias y Recursos
 
 ### Documentación Consultada:
+
 - MDN Web Docs - JavaScript ES6+
 - CSS-Tricks - Flexbox y Grid
 - Google Maps API Documentation
@@ -820,6 +884,7 @@ carbon-calculator/
 - Web Share API Specification
 
 ### Herramientas Utilizadas:
+
 - Visual Studio Code
 - Chrome DevTools
 - Git para control de versiones
@@ -843,6 +908,6 @@ El código está bien documentado, organizado y preparado para continuar su evol
 
 ---
 
-> *"Cada viaje cuenta. Cada decisión importa. Juntos podemos reducir nuestra huella de carbono y cuidar nuestro planeta para las futuras generaciones."* 🌍💚
+> _"Cada viaje cuenta. Cada decisión importa. Juntos podemos reducir nuestra huella de carbono y cuidar nuestro planeta para las futuras generaciones."_ 🌍💚
 
 ---

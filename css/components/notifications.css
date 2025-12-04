@@ -1,0 +1,35 @@
+/* ========================================
+   NOTIFICACIONES
+   ======================================== */
+
+/* Contenedor de notificación */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    color: white;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    z-index: 10000;
+    max-width: 400px;
+    animation: slideInRight 0.3s ease-out;
+}
+
+/* Tipos de notificación */
+.notification-success {
+    background-color: var(--eco-friendly);
+}
+
+.notification-error {
+    background-color: var(--impact-high);
+}
+
+.notification-warning {
+    background-color: var(--impact-medium);
+}
+
+.notification-info {
+    background-color: var(--secondary-color);
+}

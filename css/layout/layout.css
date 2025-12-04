@@ -1,0 +1,39 @@
+/* ========================================
+   LAYOUT GENERAL
+   ======================================== */
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Sección principal */
+.main {
+    padding: var(--spacing-xl) 0;
+}
+
+/* Título de sección */
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: rgb(203, 203, 203);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+.footer {
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    text-align: center;
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}

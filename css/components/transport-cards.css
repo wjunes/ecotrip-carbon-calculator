@@ -1,0 +1,115 @@
+/* ========================================
+   TARJETAS DE TRANSPORTE
+   ======================================== */
+
+/* Contenedor de selección de transporte */
+.transport-selection {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+/* Grid de tarjetas */
+.transport-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Tarjeta de transporte */
+.transport-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de gradiente en hover */
+.transport-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: 0;
+}
+
+/* Efecto hover */
+.transport-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Estado seleccionado */
+.transport-card.selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.transport-card.selected::before {
+    opacity: 0.1;
+}
+
+/* Asegurar que el contenido esté sobre el gradiente */
+.transport-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Icono de transporte */
+.transport-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-sm);
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Nombre del transporte */
+.transport-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Descripción del transporte */
+.transport-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Badge eco-friendly */
+.transport-eco-badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 600;
+    background-color: var(--eco-friendly);
+    color: white;
+}
+
+/* Variantes de impacto */
+.transport-eco-badge.impact-low {
+    background-color: var(--impact-low);
+}
+
+.transport-eco-badge.impact-medium {
+    background-color: var(--impact-medium);
+}
+
+.transport-eco-badge.impact-high {
+    background-color: var(--impact-high);
+}

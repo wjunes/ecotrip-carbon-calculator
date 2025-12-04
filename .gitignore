@@ -14,6 +14,16 @@ api-keys.js
 secrets.js
 
 # ========================================
+# Archivos de respaldo y temporales
+# ========================================
+*.backup
+*.bak
+*.tmp
+*.old
+*~
+.DS_Store
+
+# ========================================
 # Archivos de prueba y desarrollo
 # ========================================
 test.html

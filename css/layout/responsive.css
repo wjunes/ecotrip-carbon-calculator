@@ -1,0 +1,71 @@
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablets y dispositivos medianos (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Header */
+    .header-title {
+        font-size: 2rem;
+    }
+
+    .header-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Grid de transporte */
+    .transport-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--spacing-sm);
+    }
+
+    /* Grid de resultados */
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 95%;
+        padding: var(--spacing-md);
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+    .result-value {
+        font-size: 2rem;
+    }
+}
+
+/* Móviles (max-width: 480px) */
+@media (max-width: 480px) {
+    /* Header */
+    .header-icon {
+        font-size: 3rem;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+    }
+
+    /* Grid de transporte */
+    .transport-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .transport-icon {
+        font-size: 3rem;
+    }
+
+    /* Acciones del modal */
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}

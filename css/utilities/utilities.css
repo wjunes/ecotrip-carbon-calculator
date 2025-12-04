@@ -1,0 +1,38 @@
+/* ========================================
+   UTILIDADES
+   ======================================== */
+
+/* Clase para ocultar elementos */
+.hidden {
+    display: none !important;
+}
+
+/* Animación de fade-in */
+.fade-in {
+    animation: fadeIn var(--transition-normal);
+}
+
+/* Animación de pulso */
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+   SCROLLBAR PERSONALIZADO
+   ======================================== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
