@@ -9,7 +9,28 @@ class UIManager {
     constructor() {
         this.selectedTransport = null;
         this.modal = null;
+        this.apiService = null; // Servicio de API para autocompletado
+        this.routesData = null; // Servicio de rutas y distancias
+        this.selectedOriginCity = null;
+        this.selectedDestinationCity = null;
         this.initializeElements();
+    }
+
+    /**
+     * Establece el servicio API
+     */
+    setAPIService(apiService) {
+        this.apiService = apiService;
+        this.setupAutocomplete();
+        console.log('✅ API Service conectado a UIManager');
+    }
+
+    /**
+     * Establece el servicio de rutas
+     */
+    setRoutesData(routesData) {
+        this.routesData = routesData;
+        console.log('✅ RoutesData conectado a UIManager');
     }
 
     /**
@@ -133,15 +154,40 @@ class UIManager {
         const origin = this.originInput.value.trim();
         const destination = this.destinationInput.value.trim();
 
-        if (origin && destination) {
-            const result = routesData.calculateDistance(origin, destination);
+        if (!origin || !destination) {
+            console.log('⚠️ Origen o destino vacío, no se puede calcular');
+            return;
+        }
+
+        if (!this.routesData) {
+            console.warn('⚠️ RoutesData no está disponible');
+            return;
+        }
+
+        // Si tenemos ciudades seleccionadas del autocompletado, usar esas
+        const originCity = this.selectedOriginCity ? this.selectedOriginCity.name : origin;
+        const destCity = this.selectedDestinationCity ? this.selectedDestinationCity.name : destination;
+
+        console.log(`🔍 Calculando distancia: ${originCity} → ${destCity}`);
+        
+        const result = this.routesData.calculateDistance(originCity, destCity);
+        
+        console.log('📊 Resultado del cálculo:', result);
+        
+        if (result.distance !== null) {
+            this.distanceInput.value = result.distance;
             
-            if (result.distance !== null) {
-                this.distanceInput.value = result.distance;
-                this.showNotification(result.message, 'success');
+            // Mostrar información adicional si está disponible
+            if (result.routeInfo) {
+                const duration = result.routeInfo.durationHours;
+                const type = result.routeInfo.type;
+                const msg = `✅ ${result.message} (${duration}h, ${type})`;
+                this.showNotification(msg, 'success');
             } else {
-                this.showNotification(result.error, 'warning');
+                this.showNotification(result.message, 'success');
             }
+        } else {
+            this.showNotification(result.error, 'warning');
         }
     }
 
@@ -302,6 +348,206 @@ class UIManager {
             this.copyToClipboard(shareText);
             this.showNotification('¡Resultados copiados al portapapeles!', 'success');
         }
+    }
+
+    /**
+     * Configura el sistema de autocompletado para origen y destino
+     */
+    setupAutocomplete() {
+        if (!this.apiService) {
+            console.warn('⚠️ API Service no disponible para autocompletado');
+            return;
+        }
+
+        // Contenedores de sugerencias
+        const originSuggestions = document.getElementById('originSuggestions');
+        const destinationSuggestions = document.getElementById('destinationSuggestions');
+
+        if (!originSuggestions || !destinationSuggestions) {
+            console.warn('⚠️ Contenedores de sugerencias no encontrados');
+            return;
+        }
+
+        // Configurar autocompletado para origen
+        this.setupAutocompleteInput(
+            this.originInput,
+            originSuggestions,
+            (cityData) => {
+                console.log('✅ Ciudad origen seleccionada:', cityData);
+                this.selectedOriginCity = cityData;
+                this.tryAutoCalculateDistance();
+            }
+        );
+
+        // Configurar autocompletado para destino
+        this.setupAutocompleteInput(
+            this.destinationInput,
+            destinationSuggestions,
+            (cityData) => {
+                console.log('✅ Ciudad destino seleccionada:', cityData);
+                this.selectedDestinationCity = cityData;
+                this.tryAutoCalculateDistance();
+            }
+        );
+
+        // Cerrar sugerencias al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.autocomplete-wrapper')) {
+                this.hideAllSuggestions();
+            }
+        });
+
+        console.log('✅ Autocompletado configurado');
+    }
+
+    /**
+     * Configura autocompletado para un input específico
+     * @param {HTMLElement} input - Input de texto
+     * @param {HTMLElement} suggestionsContainer - Contenedor de sugerencias
+     * @param {Function} onSelect - Callback al seleccionar una ciudad
+     */
+    setupAutocompleteInput(input, suggestionsContainer, onSelect) {
+        if (!input || !suggestionsContainer) return;
+
+        let currentFocus = -1;
+
+        // Evento input - mostrar sugerencias
+        input.addEventListener('input', async (e) => {
+            const query = e.target.value.trim();
+            
+            if (query.length < 2) {
+                this.hideSuggestions(suggestionsContainer);
+                return;
+            }
+
+            // Obtener sugerencias del API
+            const suggestions = this.apiService.getSuggestions(query, 8);
+            
+            if (suggestions.length === 0) {
+                this.hideSuggestions(suggestionsContainer);
+                return;
+            }
+
+            // Mostrar sugerencias
+            this.showSuggestions(suggestionsContainer, suggestions, (cityData) => {
+                input.value = cityData.name;
+                this.hideSuggestions(suggestionsContainer);
+                onSelect(cityData);
+            });
+
+            currentFocus = -1;
+        });
+
+        // Navegación con teclado
+        input.addEventListener('keydown', (e) => {
+            const items = suggestionsContainer.querySelectorAll('.autocomplete-item');
+            
+            if (items.length === 0) return;
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                currentFocus++;
+                if (currentFocus >= items.length) currentFocus = 0;
+                this.setActiveItem(items, currentFocus);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                currentFocus--;
+                if (currentFocus < 0) currentFocus = items.length - 1;
+                this.setActiveItem(items, currentFocus);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (currentFocus > -1 && items[currentFocus]) {
+                    items[currentFocus].click();
+                }
+            } else if (e.key === 'Escape') {
+                this.hideSuggestions(suggestionsContainer);
+                currentFocus = -1;
+            }
+        });
+
+        // Limpiar selección al cambiar manualmente
+        input.addEventListener('change', () => {
+            if (input === this.originInput) {
+                this.selectedOriginCity = null;
+            } else {
+                this.selectedDestinationCity = null;
+            }
+        });
+    }
+
+    /**
+     * Muestra sugerencias en el contenedor
+     * @param {HTMLElement} container - Contenedor de sugerencias
+     * @param {Array} suggestions - Array de sugerencias
+     * @param {Function} onSelect - Callback al seleccionar
+     */
+    showSuggestions(container, suggestions, onSelect) {
+        container.innerHTML = '';
+        container.classList.add('show');
+
+        suggestions.forEach(suggestion => {
+            const item = document.createElement('div');
+            item.className = 'autocomplete-item';
+            
+            // Determinar país para el badge
+            const countryCode = suggestion.id.substring(0, 2);
+            const countryNames = {
+                'ar': 'Argentina',
+                'br': 'Brasil',
+                'uy': 'Uruguay'
+            };
+            
+            item.innerHTML = `
+                <div class="autocomplete-item-main">
+                    <strong>${suggestion.name}</strong>
+                    ${suggestion.state ? `<span class="autocomplete-item-state">${suggestion.state}</span>` : ''}
+                </div>
+                <span class="autocomplete-country-badge ${countryCode}">${countryNames[countryCode] || countryCode.toUpperCase()}</span>
+            `;
+
+            item.addEventListener('click', () => {
+                onSelect(suggestion);
+            });
+
+            container.appendChild(item);
+        });
+    }
+
+    /**
+     * Oculta el contenedor de sugerencias
+     * @param {HTMLElement} container - Contenedor a ocultar
+     */
+    hideSuggestions(container) {
+        if (container) {
+            container.classList.remove('show');
+            container.innerHTML = '';
+        }
+    }
+
+    /**
+     * Oculta todas las sugerencias
+     */
+    hideAllSuggestions() {
+        const allSuggestions = document.querySelectorAll('.autocomplete-suggestions');
+        allSuggestions.forEach(container => {
+            this.hideSuggestions(container);
+        });
+    }
+
+    /**
+     * Marca un item como activo en la navegación por teclado
+     * @param {NodeList} items - Lista de items
+     * @param {number} index - Índice del item activo
+     */
+    setActiveItem(items, index) {
+        items.forEach((item, i) => {
+            if (i === index) {
+                item.classList.add('active');
+                item.scrollIntoView({ block: 'nearest' });
+            } else {
+                item.classList.remove('active');
+            }
+        });
     }
 
     /**

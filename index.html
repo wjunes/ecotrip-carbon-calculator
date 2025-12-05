@@ -29,12 +29,20 @@
 
                 <div class="form-group">
                     <label for="origin">Origen</label>
-                    <input type="text" id="origin" class="form-input" placeholder="Ingresa el origen del viaje">
+                    <div class="autocomplete-wrapper">
+                        <input type="text" id="origin" class="form-input" placeholder="Ingresa el origen del viaje"
+                            autocomplete="off">
+                        <div class="autocomplete-suggestions" id="originSuggestions"></div>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="destination">Destino</label>
-                    <input type="text" id="destination" class="form-input" placeholder="Ingresa el destino del viaje">
+                    <div class="autocomplete-wrapper">
+                        <input type="text" id="destination" class="form-input"
+                            placeholder="Ingresa el destino del viaje" autocomplete="off">
+                        <div class="autocomplete-suggestions" id="destinationSuggestions"></div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -159,6 +167,7 @@
 
     <!-- Scripts -->
     <script src="js/config.js"></script>
+    <script src="js/distance-api.js"></script>
     <script src="js/routes-data.js"></script>
     <script src="js/calculator.js"></script>
     <script src="js/ui.js"></script>

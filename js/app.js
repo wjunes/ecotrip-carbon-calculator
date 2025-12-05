@@ -10,13 +10,14 @@ class EcoTripApp {
         this.ui = null;
         this.calculator = null;
         this.routesData = null;
+        this.apiService = null;
         this.initialized = false;
     }
 
     /**
      * Inicializa la aplicación
      */
-    init() {
+    async init() {
         if (this.initialized) {
             console.warn('⚠️ La aplicación ya está inicializada');
             return;
@@ -28,10 +29,21 @@ class EcoTripApp {
             // Verificar que los módulos estén disponibles
             this.checkDependencies();
 
+            // Inicializar API Service para autocompletado
+            await this.initializeAPIService();
+
             // Inicializar módulos - CREAR las instancias aquí
             this.ui = new UIManager();
             this.calculator = new CarbonCalculator();
-            this.routesData = new RoutesData();
+            this.routesData = new RoutesData(this.apiService);
+
+            // Conectar API Service con UI Manager
+            if (this.apiService) {
+                this.ui.setAPIService(this.apiService);
+            }
+
+            // Conectar RoutesData con UI Manager
+            this.ui.setRoutesData(this.routesData);
 
             // Configurar event listeners
             this.setupEventListeners();
@@ -47,6 +59,34 @@ class EcoTripApp {
         } catch (error) {
             console.error('❌ Error inicializando la aplicación:', error);
             this.handleInitError(error);
+        }
+    }
+
+    /**
+     * Inicializa el servicio de API para ciudades y rutas
+     */
+    async initializeAPIService() {
+        try {
+            // Verificar si DistanceAPIService está disponible
+            if (typeof DistanceAPIService === 'undefined') {
+                console.warn('⚠️ DistanceAPIService no disponible. Funcionará en modo legacy.');
+                return;
+            }
+
+            console.log('📡 Inicializando servicio de API...');
+            
+            this.apiService = new DistanceAPIService();
+            await this.apiService.initialize();
+            
+            const cityCount = this.apiService.getCityCount();
+            const routeCount = this.apiService.getRouteCount();
+            
+            console.log(`✅ API Service inicializado: ${cityCount} ciudades, ${routeCount} rutas`);
+            
+        } catch (error) {
+            console.error('❌ Error inicializando API Service:', error);
+            console.warn('⚠️ Continuando sin API Service. Funcionará en modo legacy.');
+            this.apiService = null;
         }
     }
 
@@ -379,14 +419,16 @@ estén cargados correctamente.
 // Crear instancia global de la aplicación
 const ecoTripApp = new EcoTripApp();
 
-// Inicializar cuando el DOM esté listo
+// Inicializar cuando el DOM esté listo (con soporte async)
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        ecoTripApp.init();
+    document.addEventListener('DOMContentLoaded', async () => {
+        await ecoTripApp.init();
     });
 } else {
     // El DOM ya está listo
-    ecoTripApp.init();
+    (async () => {
+        await ecoTripApp.init();
+    })();
 }
 
 // Hacer la app accesible globalmente para debugging

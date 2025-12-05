@@ -1,0 +1,216 @@
+/* ========================================
+   AUTOCOMPLETADO DE CIUDADES
+   ======================================== */
+
+/* Contenedor del autocompletado */
+.autocomplete-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Lista de sugerencias */
+.autocomplete-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    border: 2px solid var(--primary-color);
+    border-top: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+    display: none;
+}
+
+.autocomplete-suggestions.show {
+    display: block;
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Item de sugerencia */
+.autocomplete-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.selected,
+.autocomplete-item.active {
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+/* Icono de bandera */
+.autocomplete-flag {
+    font-size: 1.2rem;
+    min-width: 24px;
+}
+
+/* Contenido del item */
+.autocomplete-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenido principal del item (nuevo layout) */
+.autocomplete-item-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.autocomplete-item-main strong {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.autocomplete-item-state {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Nombre de la ciudad */
+.autocomplete-city-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+/* Información adicional (estado, país) */
+.autocomplete-city-info {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Badge de país */
+.autocomplete-country-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    min-width: 35px;
+    text-align: center;
+}
+
+.autocomplete-country-badge.ar {
+    background-color: #74b9ff;
+    color: #0984e3;
+}
+
+.autocomplete-country-badge.br {
+    background-color: #55efc4;
+    color: #00b894;
+}
+
+.autocomplete-country-badge.uy {
+    background-color: #fdcb6e;
+    color: #e17055;
+}
+
+/* Mensaje de "No hay resultados" */
+.autocomplete-no-results {
+    padding: 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Loading spinner */
+.autocomplete-loading {
+    padding: 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.autocomplete-loading::before {
+    content: "⏳";
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Estado activo del input */
+.autocomplete-wrapper .form-input.has-suggestions {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    border-bottom-color: transparent;
+}
+
+/* Badge de información de ruta */
+.route-info-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 0.375rem 0.75rem;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.2));
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    color: var(--primary-dark);
+    margin-top: var(--spacing-xs);
+}
+
+.route-info-badge .icon {
+    font-size: 1rem;
+}
+
+.route-info-badge .distance {
+    font-weight: 700;
+}
+
+/* Indicador de modo automático */
+.distance-mode-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--primary-color);
+    margin-top: 0.25rem;
+}
+
+.distance-mode-indicator .icon {
+    font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .autocomplete-suggestions {
+        max-height: 250px;
+    }
+
+    .autocomplete-item {
+        padding: 0.6rem 0.8rem;
+    }
+
+    .autocomplete-city-name {
+        font-size: 0.9rem;
+    }
+
+    .autocomplete-city-info {
+        font-size: 0.8rem;
+    }
+}

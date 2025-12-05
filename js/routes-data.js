@@ -4,10 +4,20 @@
 
 /**
  * Clase para manejar el cálculo y gestión de distancias entre ubicaciones
+ * Ahora integrado con DistanceAPIService para datos JSON
  */
 class RoutesData {
-    constructor() {
+    constructor(apiService = null) {
         this.routes = KNOWN_ROUTES || {};
+        this.apiService = apiService; // Servicio de API para consultar JSON
+    }
+
+    /**
+     * Establece el servicio API
+     */
+    setAPIService(apiService) {
+        this.apiService = apiService;
+        console.log('✅ API Service conectado a RoutesData');
     }
 
     /**
@@ -37,21 +47,32 @@ class RoutesData {
 
     /**
      * Busca la distancia entre dos ubicaciones
+     * Primero intenta con API Service, luego con rutas conocidas
      * @param {string} origin - Origen
      * @param {string} destination - Destino
      * @returns {number|null} - Distancia en km o null si no se encuentra
      */
     findDistance(origin, destination) {
-        // Intenta buscar en ambas direcciones
+        // 1. Intentar con API Service (datos JSON)
+        if (this.apiService) {
+            const distance = this.apiService.getDistance(origin, destination);
+            if (distance !== null) {
+                console.log(`📍 Distancia encontrada en API: ${distance} km`);
+                return distance;
+            }
+        }
+
+        // 2. Buscar en rutas conocidas (legacy)
         const forwardKey = this.generateRouteKey(origin, destination);
         const reverseKey = this.generateRouteKey(destination, origin);
 
-        // Busca en el diccionario de rutas conocidas
         if (this.routes[forwardKey]) {
+            console.log(`📍 Distancia encontrada en rutas conocidas: ${this.routes[forwardKey]} km`);
             return this.routes[forwardKey];
         }
         
         if (this.routes[reverseKey]) {
+            console.log(`📍 Distancia encontrada en rutas conocidas: ${this.routes[reverseKey]} km`);
             return this.routes[reverseKey];
         }
 
@@ -62,17 +83,42 @@ class RoutesData {
      * Calcula distancia automáticamente o retorna null si no se puede
      * @param {string} origin - Origen
      * @param {string} destination - Destino
-     * @returns {Object} - { distance: number|null, method: string }
+     * @returns {Object} - { distance: number|null, method: string, routeInfo?: object }
      */
     calculateDistance(origin, destination) {
         if (!origin || !destination) {
+            console.warn('⚠️ RoutesData.calculateDistance: Origen o destino vacío');
             return { distance: null, method: 'none', error: 'Origen y destino requeridos' };
         }
 
-        // Busca en rutas conocidas
+        console.log(`🔍 RoutesData.calculateDistance: ${origin} → ${destination}`);
+        console.log('📡 API Service disponible:', !!this.apiService);
+
+        // Primero intentar con API Service (tiene info adicional)
+        if (this.apiService) {
+            console.log('🔎 Buscando en API Service...');
+            const routeInfo = this.apiService.getRouteInfo(origin, destination);
+            console.log('📊 Resultado de API:', routeInfo);
+            
+            if (routeInfo) {
+                console.log(`✅ Ruta encontrada en API: ${routeInfo.distance} km`);
+                return {
+                    distance: routeInfo.distance,
+                    method: 'api_route',
+                    message: `Distancia encontrada: ${routeInfo.distance} km`,
+                    routeInfo: routeInfo
+                };
+            } else {
+                console.log('⚠️ Ruta no encontrada en API');
+            }
+        }
+
+        // Busca en rutas conocidas (legacy)
+        console.log('🔎 Buscando en rutas conocidas (legacy)...');
         const knownDistance = this.findDistance(origin, destination);
         
         if (knownDistance !== null) {
+            console.log(`✅ Distancia encontrada en legacy: ${knownDistance} km`);
             return { 
                 distance: knownDistance, 
                 method: 'known_route',
@@ -147,14 +193,23 @@ class RoutesData {
 
     /**
      * Obtiene sugerencias de ciudades basadas en texto ingresado
+     * Usa API Service si está disponible, sino usa lista hardcodeada
      * @param {string} input - Texto de búsqueda
-     * @returns {Array} - Array de sugerencias
+     * @returns {Array} - Array de sugerencias (objetos de ciudad completos)
      */
     getCitySuggestions(input) {
         if (!input || input.length < 2) {
             return [];
         }
 
+        // Usar API Service si está disponible
+        if (this.apiService) {
+            const suggestions = this.apiService.getSuggestions(input, 10);
+            // Devolver objetos completos para el UI
+            return suggestions;
+        }
+
+        // Fallback a lista hardcodeada
         const normalizedInput = this.normalizeCityName(input);
         
         return MAJOR_CITIES.filter(city => 

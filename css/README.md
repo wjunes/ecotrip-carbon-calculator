@@ -37,23 +37,23 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 
 ```css
 /* BASE - Fundamentos */
-@import url('base/variables.css');
-@import url('base/animations.css');
+@import url("base/variables.css");
+@import url("base/animations.css");
 
 /* LAYOUT - Estructura */
-@import url('layout/layout.css');
-@import url('layout/responsive.css');
+@import url("layout/layout.css");
+@import url("layout/responsive.css");
 
 /* COMPONENTS - Componentes */
-@import url('components/header.css');
-@import url('components/forms.css');
-@import url('components/transport-cards.css');
-@import url('components/buttons.css');
-@import url('components/modal.css');
-@import url('components/notifications.css');
+@import url("components/header.css");
+@import url("components/forms.css");
+@import url("components/transport-cards.css");
+@import url("components/buttons.css");
+@import url("components/modal.css");
+@import url("components/notifications.css");
 
 /* UTILITIES - Utilidades */
-@import url('utilities/utilities.css');
+@import url("utilities/utilities.css");
 ```
 
 ## 📋 Descripción de Módulos
@@ -61,6 +61,7 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 ### **Base** (Fundamentos)
 
 #### `variables.css`
+
 - Variables CSS globales (`:root`)
 - Colores principales, de impacto, neutrales
 - Sombras, espaciado, border-radius
@@ -69,6 +70,7 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 - Estilos del `body`
 
 #### `animations.css`
+
 - `@keyframes float` - Animación flotante (header)
 - `@keyframes bounce` - Rebote (icono header)
 - `@keyframes fadeIn` - Aparición gradual
@@ -80,12 +82,14 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 ### **Layout** (Estructura)
 
 #### `layout.css`
+
 - `.container` - Contenedor principal con max-width
 - `.main` - Sección principal
 - `.section-title` - Títulos de sección
 - `.footer` - Pie de página
 
 #### `responsive.css`
+
 - Media query `@media (max-width: 768px)` - Tablets
 - Media query `@media (max-width: 480px)` - Móviles
 - Ajustes de tamaño de fuente, grids y espaciado
@@ -93,17 +97,20 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 ### **Components** (Componentes)
 
 #### `header.css`
+
 - `.header` - Contenedor del header con gradiente
 - `.header::before` - Círculo animado de fondo
 - `.header-content`, `.header-icon`, `.header-title`, `.header-subtitle`
 
 #### `forms.css`
+
 - `.trip-details` - Contenedor del formulario
 - `.form-group`, `.form-group label`
 - `.form-input`, `.form-select` - Inputs y selects
 - Estados `:focus` y `::placeholder`
 
 #### `transport-cards.css`
+
 - `.transport-selection` - Contenedor con backdrop-filter
 - `.transport-grid` - Grid de tarjetas
 - `.transport-card` - Tarjeta individual con estados (hover, selected)
@@ -111,6 +118,7 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 - `.transport-eco-badge` - Badges de impacto (eco-friendly, low, medium, high)
 
 #### `buttons.css`
+
 - `.calculate-btn` - Botón principal de cálculo
 - `.btn-primary` - Botón primario (modal)
 - `.btn-secondary` - Botón secundario (modal)
@@ -118,6 +126,7 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 - Estados `:hover`, `:active`, `:disabled`
 
 #### `modal.css`
+
 - `.modal` - Overlay del modal con backdrop-filter
 - `.modal-content` - Contenido del modal
 - `.modal-title` - Título del modal
@@ -128,6 +137,7 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 - `.modal-actions` - Acciones del modal
 
 #### `notifications.css`
+
 - `.notification` - Contenedor de notificación
 - `.notification-success`, `.notification-error`
 - `.notification-warning`, `.notification-info`
@@ -135,6 +145,7 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 ### **Utilities** (Utilidades)
 
 #### `utilities.css`
+
 - `.hidden` - Ocultar elementos
 - `.fade-in` - Aplicar animación fadeIn
 - `.pulse` - Aplicar animación pulse
@@ -144,31 +155,37 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 ## ✅ Ventajas de la Arquitectura Modular
 
 ### 1. **Mantenibilidad**
+
 - Fácil localizar y editar estilos específicos
 - Cada archivo tiene una responsabilidad única
 - Código más limpio y organizado
 
 ### 2. **Escalabilidad**
+
 - Agregar nuevos componentes sin afectar existentes
 - Fácil expandir funcionalidades
 - Estructura clara para nuevos desarrolladores
 
 ### 3. **Reutilización**
+
 - Componentes independientes reutilizables
 - Variables CSS centralizadas
 - Consistencia en toda la aplicación
 
 ### 4. **Performance**
+
 - Los navegadores pueden cachear archivos individuales
 - Posibilidad de cargar solo los módulos necesarios
 - Menor tiempo de descarga en actualizaciones parciales
 
 ### 5. **Colaboración**
+
 - Múltiples desarrolladores pueden trabajar simultáneamente
 - Menos conflictos en control de versiones (Git)
 - Revisiones de código más enfocadas
 
 ### 6. **Testing**
+
 - Facilita el testing de componentes individuales
 - Debugging más rápido y preciso
 - Identificación clara de problemas
@@ -176,6 +193,7 @@ El archivo `styles.css` actúa como punto de entrada y orquestador, importando t
 ## 🔄 Migración desde Monolito
 
 El archivo original `styles.css` (730 líneas) ha sido dividido en:
+
 - **2 archivos base** (~140 líneas)
 - **2 archivos layout** (~105 líneas)
 - **6 archivos components** (~385 líneas)

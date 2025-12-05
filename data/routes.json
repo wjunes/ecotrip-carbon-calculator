@@ -1,0 +1,551 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2025-12-04",
+    "description": "Base de datos de rutas y distancias entre ciudades de Argentina, Brasil y Uruguay",
+    "unit": "kilometers",
+    "totalRoutes": 120
+  },
+  "routes": [
+    {
+      "id": "route_001",
+      "origin": "ar_bsas",
+      "destination": "ar_cordoba",
+      "distance": 710,
+      "durationHours": 9.5,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_002",
+      "origin": "ar_bsas",
+      "destination": "ar_rosario",
+      "distance": 305,
+      "durationHours": 4,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_003",
+      "origin": "ar_bsas",
+      "destination": "ar_mendoza",
+      "distance": 1040,
+      "durationHours": 13,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_004",
+      "origin": "ar_bsas",
+      "destination": "ar_laplata",
+      "distance": 56,
+      "durationHours": 1,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_005",
+      "origin": "ar_bsas",
+      "destination": "ar_mardelplata",
+      "distance": 404,
+      "durationHours": 5,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_006",
+      "origin": "ar_bsas",
+      "destination": "ar_bariloche",
+      "distance": 1640,
+      "durationHours": 21,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_007",
+      "origin": "ar_bsas",
+      "destination": "ar_salta",
+      "distance": 1560,
+      "durationHours": 20,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_008",
+      "origin": "ar_bsas",
+      "destination": "ar_tucuman",
+      "distance": 1310,
+      "durationHours": 17,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_009",
+      "origin": "ar_bsas",
+      "destination": "ar_ushuaia",
+      "distance": 3080,
+      "durationHours": 45,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_010",
+      "origin": "ar_bsas",
+      "destination": "ar_neuquen",
+      "distance": 1175,
+      "durationHours": 15,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_011",
+      "origin": "ar_cordoba",
+      "destination": "ar_rosario",
+      "distance": 405,
+      "durationHours": 5.5,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_012",
+      "origin": "ar_cordoba",
+      "destination": "ar_mendoza",
+      "distance": 540,
+      "durationHours": 7,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_013",
+      "origin": "ar_cordoba",
+      "destination": "ar_tucuman",
+      "distance": 610,
+      "durationHours": 8,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_014",
+      "origin": "ar_mendoza",
+      "destination": "ar_sanjuan",
+      "distance": 170,
+      "durationHours": 2.5,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_015",
+      "origin": "ar_rosario",
+      "destination": "ar_santafe",
+      "distance": 170,
+      "durationHours": 2,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_016",
+      "origin": "ar_bsas",
+      "destination": "uy_montevideo",
+      "distance": 230,
+      "durationHours": 3,
+      "type": "international",
+      "countries": ["AR", "UY"]
+    },
+    {
+      "id": "route_017",
+      "origin": "ar_bsas",
+      "destination": "uy_colonia",
+      "distance": 50,
+      "durationHours": 1,
+      "type": "ferry",
+      "countries": ["AR", "UY"]
+    },
+    {
+      "id": "route_018",
+      "origin": "ar_bsas",
+      "destination": "br_saopaulo",
+      "distance": 2540,
+      "durationHours": 32,
+      "type": "international",
+      "countries": ["AR", "BR"]
+    },
+    {
+      "id": "route_019",
+      "origin": "ar_bsas",
+      "destination": "br_rio",
+      "distance": 2810,
+      "durationHours": 36,
+      "type": "international",
+      "countries": ["AR", "BR"]
+    },
+    {
+      "id": "route_020",
+      "origin": "ar_bsas",
+      "destination": "br_portoalegre",
+      "distance": 1150,
+      "durationHours": 15,
+      "type": "international",
+      "countries": ["AR", "BR"]
+    },
+    {
+      "id": "route_021",
+      "origin": "ar_posadas",
+      "destination": "br_fozdoiguacu",
+      "distance": 335,
+      "durationHours": 5,
+      "type": "international",
+      "countries": ["AR", "BR"]
+    },
+    {
+      "id": "route_022",
+      "origin": "br_saopaulo",
+      "destination": "br_rio",
+      "distance": 430,
+      "durationHours": 6,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_023",
+      "origin": "br_saopaulo",
+      "destination": "br_brasilia",
+      "distance": 1015,
+      "durationHours": 12,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_024",
+      "origin": "br_saopaulo",
+      "destination": "br_curitiba",
+      "distance": 408,
+      "durationHours": 5.5,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_025",
+      "origin": "br_saopaulo",
+      "destination": "br_bh",
+      "distance": 586,
+      "durationHours": 8,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_026",
+      "origin": "br_saopaulo",
+      "destination": "br_campinas",
+      "distance": 96,
+      "durationHours": 1.5,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_027",
+      "origin": "br_saopaulo",
+      "destination": "br_santossp",
+      "distance": 72,
+      "durationHours": 1,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_028",
+      "origin": "br_rio",
+      "destination": "br_bh",
+      "distance": 434,
+      "durationHours": 6,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_029",
+      "origin": "br_rio",
+      "destination": "br_brasilia",
+      "distance": 1148,
+      "durationHours": 14,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_030",
+      "origin": "br_curitiba",
+      "destination": "br_florianopolis",
+      "distance": 300,
+      "durationHours": 4,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_031",
+      "origin": "br_curitiba",
+      "destination": "br_portoalegre",
+      "distance": 711,
+      "durationHours": 9,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_032",
+      "origin": "br_curitiba",
+      "destination": "br_fozdoiguacu",
+      "distance": 637,
+      "durationHours": 9,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_033",
+      "origin": "br_portoalegre",
+      "destination": "br_florianopolis",
+      "distance": 476,
+      "durationHours": 6,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_034",
+      "origin": "br_brasilia",
+      "destination": "br_goiania",
+      "distance": 209,
+      "durationHours": 3,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_035",
+      "origin": "br_salvador",
+      "destination": "br_recife",
+      "distance": 839,
+      "durationHours": 11,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_036",
+      "origin": "br_fortaleza",
+      "destination": "br_recife",
+      "distance": 800,
+      "durationHours": 10,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_037",
+      "origin": "uy_montevideo",
+      "destination": "uy_colonia",
+      "distance": 177,
+      "durationHours": 2.5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_038",
+      "origin": "uy_montevideo",
+      "destination": "uy_paysandu",
+      "distance": 377,
+      "durationHours": 5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_039",
+      "origin": "uy_montevideo",
+      "destination": "uy_salto",
+      "distance": 498,
+      "durationHours": 6.5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_040",
+      "origin": "uy_montevideo",
+      "destination": "uy_maldonado",
+      "distance": 140,
+      "durationHours": 2,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_041",
+      "origin": "uy_montevideo",
+      "destination": "uy_rivera",
+      "distance": 502,
+      "durationHours": 6.5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_042",
+      "origin": "uy_montevideo",
+      "destination": "uy_tacuarembo",
+      "distance": 390,
+      "durationHours": 5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_043",
+      "origin": "uy_montevideo",
+      "destination": "uy_melo",
+      "distance": 388,
+      "durationHours": 5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_044",
+      "origin": "uy_montevideo",
+      "destination": "uy_lasPiedras",
+      "distance": 24,
+      "durationHours": 0.5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_045",
+      "origin": "uy_montevideo",
+      "destination": "uy_florida",
+      "distance": 98,
+      "durationHours": 1.5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_046",
+      "origin": "uy_montevideo",
+      "destination": "uy_sanjose",
+      "distance": 104,
+      "durationHours": 1.5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_047",
+      "origin": "uy_montevideo",
+      "destination": "uy_durazno",
+      "distance": 185,
+      "durationHours": 2.5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_048",
+      "origin": "uy_montevideo",
+      "destination": "br_portoalegre",
+      "distance": 900,
+      "durationHours": 12,
+      "type": "international",
+      "countries": ["UY", "BR"]
+    },
+    {
+      "id": "route_049",
+      "origin": "uy_colonia",
+      "destination": "ar_bsas",
+      "distance": 50,
+      "durationHours": 1,
+      "type": "ferry",
+      "countries": ["UY", "AR"]
+    },
+    {
+      "id": "route_050",
+      "origin": "uy_salto",
+      "destination": "ar_concordia",
+      "distance": 30,
+      "durationHours": 0.5,
+      "type": "bridge",
+      "countries": ["UY", "AR"]
+    },
+    {
+      "id": "route_051",
+      "origin": "br_portoalegre",
+      "destination": "uy_montevideo",
+      "distance": 900,
+      "durationHours": 12,
+      "type": "international",
+      "countries": ["BR", "UY"]
+    },
+    {
+      "id": "route_052",
+      "origin": "ar_resistencia",
+      "destination": "ar_posadas",
+      "distance": 305,
+      "durationHours": 4,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_053",
+      "origin": "ar_salta",
+      "destination": "ar_tucuman",
+      "distance": 310,
+      "durationHours": 4,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_054",
+      "origin": "ar_mendoza",
+      "destination": "ar_neuquen",
+      "distance": 585,
+      "durationHours": 8,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_055",
+      "origin": "ar_neuquen",
+      "destination": "ar_bariloche",
+      "distance": 440,
+      "durationHours": 6,
+      "type": "highway",
+      "countries": ["AR"]
+    },
+    {
+      "id": "route_056",
+      "origin": "uy_paysandu",
+      "destination": "uy_salto",
+      "distance": 122,
+      "durationHours": 1.5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_057",
+      "origin": "uy_rivera",
+      "destination": "uy_tacuarembo",
+      "distance": 168,
+      "durationHours": 2.5,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_058",
+      "origin": "uy_melo",
+      "destination": "uy_tacuarembo",
+      "distance": 230,
+      "durationHours": 3,
+      "type": "highway",
+      "countries": ["UY"]
+    },
+    {
+      "id": "route_059",
+      "origin": "br_saopaulo",
+      "destination": "br_florianopolis",
+      "distance": 705,
+      "durationHours": 9,
+      "type": "highway",
+      "countries": ["BR"]
+    },
+    {
+      "id": "route_060",
+      "origin": "br_saopaulo",
+      "destination": "br_portoalegre",
+      "distance": 1120,
+      "durationHours": 14,
+      "type": "highway",
+      "countries": ["BR"]
+    }
+  ]
+}
