@@ -113,3 +113,103 @@
 .transport-eco-badge.impact-high {
     background-color: var(--impact-high);
 }
+
+/* ========================================
+   ESTILOS ESPECÍFICOS POR VEHÍCULO
+   ======================================== */
+
+/* Auto Eléctrico - Estilo tecnológico */
+.transport-card[data-transport="electric"] {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(5, 150, 105, 0.05));
+}
+
+.transport-card[data-transport="electric"]:hover {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+    border-color: var(--eco-friendly);
+}
+
+.transport-card[data-transport="electric"].selected {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15));
+    border-color: var(--eco-friendly);
+    box-shadow:
+        0 0 0 3px rgba(16, 185, 129, 0.3),
+        0 8px 24px rgba(16, 185, 129, 0.2);
+}
+
+.transport-card[data-transport="electric"] .transport-icon {
+    animation: pulse-electric 2s ease-in-out infinite;
+}
+
+@keyframes pulse-electric {
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(2px 2px 8px rgba(16, 185, 129, 0.3));
+    }
+    50% {
+        transform: scale(1.05);
+        filter: drop-shadow(2px 2px 16px rgba(16, 185, 129, 0.6));
+    }
+}
+
+/* Auto convencional */
+.transport-card[data-transport="car"] {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.05), rgba(245, 158, 11, 0.05));
+}
+
+.transport-card[data-transport="car"]:hover {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));
+    border-color: var(--impact-medium);
+}
+
+.transport-card[data-transport="car"].selected {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15));
+    border-color: var(--impact-medium);
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
+}
+
+/* Avión - Estilo elegante */
+.transport-card[data-transport="airplane"] {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(220, 38, 38, 0.05));
+}
+
+.transport-card[data-transport="airplane"]:hover {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+    border-color: var(--impact-high);
+}
+
+.transport-card[data-transport="airplane"].selected {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.15));
+    border-color: var(--impact-high);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+}
+
+.transport-card[data-transport="airplane"] .transport-icon {
+    animation: float-airplane 3s ease-in-out infinite;
+}
+
+@keyframes float-airplane {
+    0%,
+    100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+/* Ómnibus */
+.transport-card[data-transport="bus"] {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(37, 99, 235, 0.05));
+}
+
+.transport-card[data-transport="bus"]:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.1));
+    border-color: var(--impact-low);
+}
+
+.transport-card[data-transport="bus"].selected {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(37, 99, 235, 0.15));
+    border-color: var(--impact-low);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}

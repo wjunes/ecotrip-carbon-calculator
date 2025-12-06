@@ -47,33 +47,33 @@ class RoutesData {
 
     /**
      * Busca la distancia entre dos ubicaciones
-     * Primero intenta con API Service, luego con rutas conocidas
+     * Primero intenta con rutas conocidas (KNOWN_ROUTES), luego con API Service
      * @param {string} origin - Origen
      * @param {string} destination - Destino
      * @returns {number|null} - Distancia en km o null si no se encuentra
      */
     findDistance(origin, destination) {
-        // 1. Intentar con API Service (datos JSON)
-        if (this.apiService) {
-            const distance = this.apiService.getDistance(origin, destination);
-            if (distance !== null) {
-                console.log(`📍 Distancia encontrada en API: ${distance} km`);
-                return distance;
-            }
-        }
-
-        // 2. Buscar en rutas conocidas (legacy)
+        // 1. Buscar PRIMERO en rutas conocidas (KNOWN_ROUTES) - incluye rutas internacionales
         const forwardKey = this.generateRouteKey(origin, destination);
         const reverseKey = this.generateRouteKey(destination, origin);
 
         if (this.routes[forwardKey]) {
-            console.log(`📍 Distancia encontrada en rutas conocidas: ${this.routes[forwardKey]} km`);
+            console.log(`📍 Distancia encontrada en KNOWN_ROUTES: ${this.routes[forwardKey]} km`);
             return this.routes[forwardKey];
         }
         
         if (this.routes[reverseKey]) {
-            console.log(`📍 Distancia encontrada en rutas conocidas: ${this.routes[reverseKey]} km`);
+            console.log(`📍 Distancia encontrada en KNOWN_ROUTES (reversa): ${this.routes[reverseKey]} km`);
             return this.routes[reverseKey];
+        }
+
+        // 2. Si no se encuentra, intentar con API Service (datos JSON locales)
+        if (this.apiService) {
+            const distance = this.apiService.getDistance(origin, destination);
+            if (distance !== null) {
+                console.log(`📍 Distancia encontrada en API Service: ${distance} km`);
+                return distance;
+            }
         }
 
         return null;
@@ -92,9 +92,21 @@ class RoutesData {
         }
 
         console.log(`🔍 RoutesData.calculateDistance: ${origin} → ${destination}`);
-        console.log('📡 API Service disponible:', !!this.apiService);
 
-        // Primero intentar con API Service (tiene info adicional)
+        // 1. Buscar PRIMERO en rutas conocidas (KNOWN_ROUTES) - incluye rutas internacionales
+        console.log('🔎 Buscando en KNOWN_ROUTES...');
+        const knownDistance = this.findDistance(origin, destination);
+        
+        if (knownDistance !== null) {
+            console.log(`✅ Distancia encontrada en KNOWN_ROUTES: ${knownDistance} km`);
+            return { 
+                distance: knownDistance, 
+                method: 'known_route',
+                message: `Distancia encontrada: ${knownDistance} km`
+            };
+        }
+
+        // 2. Intentar con API Service (tiene info adicional de rutas locales)
         if (this.apiService) {
             console.log('🔎 Buscando en API Service...');
             const routeInfo = this.apiService.getRouteInfo(origin, destination);
@@ -113,20 +125,7 @@ class RoutesData {
             }
         }
 
-        // Busca en rutas conocidas (legacy)
-        console.log('🔎 Buscando en rutas conocidas (legacy)...');
-        const knownDistance = this.findDistance(origin, destination);
-        
-        if (knownDistance !== null) {
-            console.log(`✅ Distancia encontrada en legacy: ${knownDistance} km`);
-            return { 
-                distance: knownDistance, 
-                method: 'known_route',
-                message: 'Distancia encontrada en rutas conocidas'
-            };
-        }
-
-        // Si no se encuentra, calcula una estimación aproximada
+        // 3. Si no se encuentra, calcula una estimación aproximada
         // (En una versión real, aquí se integraría con Google Maps API o similar)
         const estimatedDistance = this.estimateDistance(origin, destination);
         
